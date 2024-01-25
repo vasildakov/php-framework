@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Framework\Router;
 
-use Application\Handler\HomeHandler;
 use Aura\Router\Exception\ImmutableProperty;
 use Aura\Router\Exception\RouteAlreadyExists;
 use Aura\Router\RouterContainer;
@@ -20,14 +21,23 @@ final class AuraRouterFactory
      */
     public function __invoke(ContainerInterface $container): AuraRouter
     {
+        $config = $container->get('config');
+        if (!$config['routes']) {
+            throw new \RuntimeException();
+        }
+        $routes = $config['routes'];
+
         $routerContainer = new RouterContainer();
         $map = $routerContainer->getMap();
-        $map->get('home', '/', $container->get(HomeHandler::class));
 
-        /* $map->get('home', '/', function ($request, $response) {
-            $response->getBody()->write("Hello!!!");
-            return $response;
-        }); */
+        foreach ($routes as $route) {
+            extract($route);
+            if (!$container->has($handler)) {
+                continue;
+            }
+            $handler = $container->get($handler);
+            $map->route($name, $path, $handler)->allows($method);
+        }
 
         return new AuraRouter($routerContainer);
     }

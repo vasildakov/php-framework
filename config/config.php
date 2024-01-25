@@ -1,31 +1,28 @@
 <?php
 
+use Framework\Router\AuraRouterFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 
-$array = [
+return [
     'dependencies' => [
-        'aliases'   => [
-            //TemplateRendererInterface::class => TwigRenderer::class,
-            //'Twig_Environment'               => Environment::class,
-        ],
+        'aliases'   => [],
         'invokables' => [
             EmitterInterface::class => SapiEmitter::class,
-            //RouterContainer::class  => InvokableFactory::class,
         ],
         'factories' => [
-            Framework\Application::class => Framework\ApplicationFactory::class,
-            //Framework\Router\RouterInterface::class => Framework\Container\LaminasRouterFactory::class,
-            //Environment::class   => Framework\Template\Twig\TwigEnvironmentFactory::class,
-            //TwigRenderer::class  => Framework\Template\Twig\TwigRendererFactory::class,
-
-
-            DateTime::class => InvokableFactory::class,
+            \Framework\Application::class => \Framework\ApplicationFactory::class,
+            \Framework\Router\RouterInterface::class => AuraRouterFactory::class,
+            \Application\Handler\HomeHandler::class => \Application\Handler\HomeHandlerFactory::class,
+        ],
+    ],
+    'routes' => [
+        [
+            'name' => 'home',
+            'path' => '/',
+            'method' => 'GET',
+            'handler' => \Application\Handler\HomeHandler::class
         ],
     ],
 ];
-
-$config = new ArrayObject($array);
-
-return (array) $config;

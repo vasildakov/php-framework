@@ -12,6 +12,7 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use RuntimeException;
 
 class Application implements ApplicationInterface
 {
@@ -42,7 +43,9 @@ class Application implements ApplicationInterface
 
         $route = $this->router->match($request);
         if (false === $route) {
-            throw new Exception('Invalid callable');
+            throw new RuntimeException(
+                'Invalid handler!'
+            );
         }
 
         if ($route->handler instanceof RequestHandlerInterface) {
