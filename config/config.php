@@ -15,6 +15,8 @@ return [
             \Framework\Application::class => \Framework\ApplicationFactory::class,
             \Framework\Router\RouterInterface::class => AuraRouterFactory::class,
             \Application\Handler\HomeHandler::class => \Application\Handler\HomeHandlerFactory::class,
+            \Application\Handler\PingHandler::class => \Application\Handler\PingHandlerFactory::class,
+            \Application\Service\ImmutableClock::class => InvokableFactory::class,
         ],
     ],
     'routes' => [
@@ -23,6 +25,12 @@ return [
             'path' => '/',
             'method' => 'GET',
             'handler' => \Application\Handler\HomeHandler::class
+        ],
+        [
+            'name' => 'ping',
+            'path' => '/ping',
+            'method' => 'GET',
+            'handler' => \Application\Handler\PingHandler::class
         ],
     ],
 ];

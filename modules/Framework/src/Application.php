@@ -11,6 +11,7 @@ use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 
@@ -34,6 +35,21 @@ class Application implements ApplicationInterface
         $this->emitter->emit($response);
     }
 
+    private function isCallable($handler): bool
+    {
+        return is_callable($handler);
+    }
+
+    private function isMiddleware($handler): bool
+    {
+        return $handler instanceof MiddlewareInterface;
+    }
+
+    private function isRequestHandler($handler): bool
+    {
+        return $handler instanceof RequestHandlerInterface;
+    }
+
     /**
      * @throws Exception
      */
@@ -48,13 +64,17 @@ class Application implements ApplicationInterface
             );
         }
 
-        if ($route->handler instanceof RequestHandlerInterface) {
+        if ($this->isCallable($route->handler)) {
+            $callable = $route->handler;
+            $response =  $callable($request, $response);
+        }
+
+        if ($this->isRequestHandler($route->handler)) {
             $response = $route->handler->handle($request);
         }
 
-        if (is_callable($route->handler)) {
-            $callable = $route->handler;
-            $response =  $callable($request, $response);
+        if ($this->isMiddleware($route->handler)) {
+            $response = $route->handler->process($request);
         }
 
         return $response->withStatus(200);

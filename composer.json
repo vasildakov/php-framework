@@ -9,7 +9,10 @@
         "laminas/laminas-diactoros": "^3.3",
         "laminas/laminas-servicemanager": "^3.10",
         "laminas/laminas-httphandlerrunner": "^2.10",
-        "aura/router": "^3.1"
+        "aura/router": "^3.1",
+        "psr/http-server-middleware": "^1.0",
+        "psr/clock": "^1.0",
+        "fig/http-message-util": "^1.1"
     },
     "license": "MIT",
     "autoload": {
