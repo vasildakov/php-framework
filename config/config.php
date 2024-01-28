@@ -1,6 +1,7 @@
 <?php
 
 use Framework\Router\AuraRouterFactory;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
@@ -32,5 +33,19 @@ return [
             'method' => 'GET',
             'handler' => \Application\Handler\PingHandler::class
         ],
+        [
+            'name' => 'users',
+            'path' => '/users',
+            'method' => 'GET',
+            'handler' => function ($request) {
+                return new JsonResponse(
+                    [
+                        'users' => [
+                            [1],[2],[3],
+                        ]
+                    ]
+                );
+            }
+        ]
     ],
 ];

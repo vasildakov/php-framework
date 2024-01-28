@@ -6,6 +6,7 @@ namespace Framework;
 
 use Exception;
 use Framework\Router\RouterInterface;
+use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\ResponseFactory;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
@@ -59,9 +60,7 @@ class Application implements ApplicationInterface
 
         $route = $this->router->match($request);
         if (false === $route) {
-            throw new RuntimeException(
-                'Invalid handler!'
-            );
+            return new JsonResponse(['error' => 'Not found!'], 404);
         }
 
         if ($this->isCallable($route->handler)) {

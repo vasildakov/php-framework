@@ -32,10 +32,11 @@ final class AuraRouterFactory
 
         foreach ($routes as $route) {
             extract($route);
-            if (!$container->has($handler)) {
-                continue;
+
+            if (is_string($handler)) {
+                $handler = $container->get($handler);
             }
-            $handler = $container->get($handler);
+
             $map->route($name, $path, $handler)->allows($method);
         }
 
