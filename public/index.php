@@ -1,8 +1,6 @@
 <?php
 
 use Psr\Container\ContainerInterface;
-use Framework\ApplicationInterface;
-use Framework\Application;
 use Laminas\Diactoros\ServerRequestFactory;
 
 chdir(dirname(__DIR__));
@@ -12,10 +10,10 @@ require 'vendor/autoload.php';
     /** @var ContainerInterface $container */
     $container = require dirname(__DIR__) . '/config/container.php';
 
-    /** @var ApplicationInterface $application */
-    $application = $container->get(Application::class);
+    /** @var \Prism\ApplicationInterface $application */
+    $application = $container->get(\Prism\Application::class);
 
-    //$request = ServerRequestFactory::fromGlobals();
+    $request = ServerRequestFactory::fromGlobals();
 
-    $application->run();
+    $application->run($request);
 })();

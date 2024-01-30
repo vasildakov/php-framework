@@ -1,6 +1,6 @@
 <?php
 
-use Framework\Router\AuraRouterFactory;
+use Prism\Router\AuraRouterFactory;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
@@ -13,8 +13,8 @@ return [
             EmitterInterface::class => SapiEmitter::class,
         ],
         'factories' => [
-            \Framework\Application::class => \Framework\ApplicationFactory::class,
-            \Framework\Router\RouterInterface::class => AuraRouterFactory::class,
+            \Prism\Application::class => \Prism\ApplicationFactory::class,
+            \Prism\Router\RouterInterface::class => AuraRouterFactory::class,
             \Application\Handler\HomeHandler::class => \Application\Handler\HomeHandlerFactory::class,
             \Application\Handler\PingHandler::class => \Application\Handler\PingHandlerFactory::class,
             \Application\Service\ImmutableClock::class => InvokableFactory::class,

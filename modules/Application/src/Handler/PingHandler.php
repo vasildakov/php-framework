@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Application\Handler;
 
 use Fig\Http\Message\StatusCodeInterface;
-use Framework\Handler\AbstractHandler;
+use Prism\Handler\AbstractHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Message\ResponseInterface;

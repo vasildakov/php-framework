@@ -18,7 +18,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "modules/Application/src/",
-            "Framework\\": "modules/Framework/src/"
+            "Prism\\": "modules/Prism/src/"
         }
     },
     "authors": [

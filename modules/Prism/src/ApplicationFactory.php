@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework;
+namespace Prism;
 
-use Framework\Router\RouterInterface;
+use Prism\Router\RouterInterface;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Router;
+namespace Prism\Router;
 
 use Aura\Router\Route;
 use Aura\Router\RouterContainer;

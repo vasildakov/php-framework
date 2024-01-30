@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Handler;
+namespace Prism\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

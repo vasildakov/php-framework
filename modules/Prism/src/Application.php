@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Framework;
+namespace Prism;
 
 use Exception;
-use Framework\Router\RouterInterface;
+use Prism\Router\RouterInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\ResponseFactory;
 use Laminas\Diactoros\ServerRequestFactory;
@@ -14,7 +14,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use RuntimeException;
 
 class Application implements ApplicationInterface
 {

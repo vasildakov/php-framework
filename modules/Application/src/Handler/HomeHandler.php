@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Handler;
 
-use Framework\Handler\AbstractHandler;
+use Prism\Handler\AbstractHandler;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
