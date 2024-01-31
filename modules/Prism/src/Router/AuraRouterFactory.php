@@ -32,7 +32,6 @@ final class AuraRouterFactory
 
         foreach ($routes as $route) {
             extract($route);
-
             if (is_string($handler)) {
                 $handler = $container->get($handler);
             }

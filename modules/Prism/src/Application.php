@@ -71,10 +71,6 @@ class Application implements ApplicationInterface
             $response = $route->handler->handle($request);
         }
 
-        if ($this->isMiddleware($route->handler)) {
-            $response = $route->handler->process($request);
-        }
-
         return $response->withStatus(200);
     }
 }

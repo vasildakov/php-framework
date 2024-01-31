@@ -5,6 +5,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
+use Prism\Router\RouterFactory;
 
 return [
     'dependencies' => [
@@ -14,7 +15,8 @@ return [
         ],
         'factories' => [
             \Prism\Application::class => \Prism\ApplicationFactory::class,
-            \Prism\Router\RouterInterface::class => AuraRouterFactory::class,
+            // \Prism\Router\RouterInterface::class => AuraRouterFactory::class,
+            \Prism\Router\RouterInterface::class => RouterFactory::class,
             \Application\Handler\HomeHandler::class => \Application\Handler\HomeHandlerFactory::class,
             \Application\Handler\PingHandler::class => \Application\Handler\PingHandlerFactory::class,
             \Application\Service\ImmutableClock::class => InvokableFactory::class,
@@ -41,7 +43,7 @@ return [
                 return new JsonResponse(
                     [
                         'users' => [
-                            [1],[2],[3],
+                            ['id' => 1], ['id' => 2], ['id' => 3],
                         ]
                     ]
                 );
